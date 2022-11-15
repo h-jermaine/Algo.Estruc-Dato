@@ -33,11 +33,13 @@ class ArbolBinario{
   private:
     NodoArbol<T> * Raiz;
     void InsertarArbol(NodoArbol<T> *&, T);
+    void Preorden(NodoArbol<T> *&);
+    void Postorden(NodoArbol<T> *&);
   public:
     ArbolBinario();
-    void InsertarArbol(T Dato){
-      InsertarArbol(Raiz, Dato);
-    }
+    void InsertarArbol(T Dato){InsertarArbol(Raiz, Dato);}
+    void Preorden(){Preorden(Raiz);}
+    void Postorden(){Postorden(Raiz);}
     T m(){
       return Raiz->HijoDer->Info;
     }
@@ -62,6 +64,36 @@ void ArbolBinario<T>::InsertarArbol(NodoArbol<T> *& Apunt, T Dato){
       InsertarArbol(Apunt->HijoDer, Dato);
   }
 }
+
+template <class T>
+void ArbolBinario<T>::Preorden(NodoArbol<T> *& Apunt){
+  if(Apunt){
+    std::cout << Apunt->Info << " ";
+    Preorden(Apunt->HijoIzq);
+    Preorden(Apunt->HijoDer);
+  }
+}
+
+template <class T>
+void ArbolBinario<T>::Inorden(NodoArbol<T> *& Apunt){
+  if(Apunt){
+    Inorden(Apunt->HijoIzq);
+    std::cout << Apunt->Info << " ";
+    Inorden(Apunt->HijoDer);
+  }
+}
+
+template <class T>
+void ArbolBinario<T>::Postorden(){
+  if(Apunt){
+    Postorden(Apunt->HijoIzq);
+    Postorden(Apunt->HijoDer);
+    std:: cout << Apunt->Info << " ";
+  }
+}
+
+template <class T>
+NodoArbol<T> * ArbolBinBus<T>::
 
 #endif
 
