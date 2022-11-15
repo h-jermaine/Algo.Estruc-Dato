@@ -41,11 +41,14 @@ template <class T>
 class ArbolBalanceado{
   private:
     NodoArbolBal<T> * Raiz;
+    int Band;
+    void InsertaBalanceado(T, NodoArbolBal<T> *, int *);
+    void Imprime(NodoArbolBal<T> *);
   public:
     ArbolBalanceado();
     NodoArbolBal<T> * RegresaRaiz();
     NodoArbolBal<T> * Busca(NodoArbolBal<T> *, T);
-    void InsertaBalanceado(T, NodoArbolBal<T> *, int *);
+    void InsertaBalanceado(T Dato){InsertaBalanceado(Dato, Raiz, &Band);}
     
     NodoArbolBal<T> * RotacionHI_HD(NodoArbolBal<T> *, NodoArbolBal<T> *);
     NodoArbolBal<T> * RotacionHD_HI(NodoArbolBal<T> *, NodoArbolBal<T> *);
@@ -56,12 +59,13 @@ class ArbolBalanceado{
     NodoArbolBal<T> *RestructuraD(NodoArbolBal<T> *, int *);
     void EliminaBalanceado(NodoArbolBal<T> *, NodoArbolBal<T> *, int *, T);
     void Sustituye(NodoArbolBal<T> *, NodoArbolBal<T> *, int *);*/
-    void Imprime(NodoArbolBal<T> *);
+    void Imprime(){Imprime(Raiz);}
 };	
 
 template <class T>
 ArbolBalanceado<T>::ArbolBalanceado(){
   Raiz = nullptr;
+  Band = 0;
 }
 
 template <class T>
@@ -177,9 +181,11 @@ void ArbolBalanceado<T>::InsertaBalanceado(T Dato, NodoArbolBal<T> * Apunt, int 
 		  }
 	}
     }
-    else{
+    else
       if(Dato > Apunt->Info){
-	if(0 < *Band){
+	InsertaBalanceado(Dato, Apunt->HijoDer, Band);
+	Apunt->HijoDer = Raiz;
+	if(0 < *Band)
 	  switch(Apunt->FE){
 	    case -1:{
 		      Apunt->FE = 0;
@@ -201,17 +207,15 @@ void ArbolBalanceado<T>::InsertaBalanceado(T Dato, NodoArbolBal<T> * Apunt, int 
 		   }
 
 	  }
-	}
-	Raiz = Apunt;
       }
-      else{
-	ApAux2 = new NodoArbolBal<T>();
-	ApAux2->Info = Dato;
-	ApAux2->FE = 0;
-	*Band = 1;
-	Raiz = ApAux2;
-      }
-    }
+    Raiz = Apunt;
+  }
+  else{
+    ApAux2 = new NodoArbolBal<T>();
+    ApAux2->Info = Dato;
+    ApAux2->FE = 0;
+    *Band = 1;
+    Raiz = ApAux2;
   }
 }
 
