@@ -1,0 +1,7 @@
+lee marshall 10 1000
+hide bush 9 99
+lara tito 1 20
+nose lara 23 450
+pepe gonzales 34 34
+isabel reyna 23 495
+lokillo lopez 21 583
