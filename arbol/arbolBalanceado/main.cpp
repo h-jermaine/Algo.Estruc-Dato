@@ -8,7 +8,7 @@ int main(){
   a1->InsertaBalanceado(2);
   a1->InsertaBalanceado(1);
   a1->InsertaBalanceado(4);
-  //a1->Imprime();
+  a1->Imprime();
 
   return 0;
 }

@@ -101,7 +101,7 @@ template <class T>
 void ArbolBalanceado<T>::Imprime(NodoArbolBal<T> * Apunt){
   if(Apunt != nullptr){
     Imprime(Apunt->HijoIzq);
-    std::cout << Apunt->Info << std::endl << std::endl;
+    std::cout << Apunt->Info << std::endl;
     Imprime(Apunt->HijoDer);
   }
 }
@@ -184,9 +184,7 @@ void ArbolBalanceado<T>::InsertaBalanceado(T Dato, NodoArbolBal<T> * Apunt, int 
     else
       if(Dato > Apunt->Info){
 	InsertaBalanceado(Dato, Apunt->HijoDer, Band);
-	std::cout << Apunt->Info << std::endl;
 	Apunt->HijoDer = Raiz;
-	std::cout << Apunt->HijoDer->Info << std::endl;
 	if(0 < *Band)
 	  switch(Apunt->FE){
 	    case -1:{
@@ -238,7 +236,7 @@ NodoArbolBal<T> * ArbolBalanceado<T>::RestructuraI(NodoArbolBal<T> * Nodo, int *
 		  Nodo->HijoDer = ApAux->HijoIzq;
 		  ApAux->HijoIzq = Nodo;
 		  switch(ApAux->FE){
-		    case 0:	Nodo-FE = 1;
+		    case 0:	Nodo->FE = 1;
 				ApAux->FE = -1;
 				*Aviso = 0;
 				break;
@@ -260,6 +258,7 @@ NodoArbolBal<T> * ArbolBalanceado<T>::RestructuraI(NodoArbolBal<T> * Nodo, int *
 
 template <class T>
 NodoArbolBal<T> * ArbolBalanceado<T>::RestructuraD(NodoArbolBal<T> * Nodo, int * Aviso){
+  NodoArbolBal<T> * ApAux;
   if(*Aviso > 0){
     switch(Nodo->FE){
       case 1: Nodo->FE = 0;
@@ -324,7 +323,7 @@ void ArbolBalanceado<T>::EliminaBalanceado(NodoArbolBal<T> * Apunt, NodoArbolBal
       EliminaBalanceado(Apunt->HijoIzq, Apunt, Avisa, Dato);
       Apunt = RestructuraI(Apunt, Avisa);
       if(ApAnt != nullptr)
-	      switch{Bandera}{
+	      switch(Bandera){
 	        case -1:	ApAnt->HijoIzq = Apunt;
 			              break;
 	        case 1:	  ApAnt->HijoDer = Apunt;
