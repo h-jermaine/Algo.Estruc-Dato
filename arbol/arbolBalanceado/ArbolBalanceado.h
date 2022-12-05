@@ -44,6 +44,7 @@ class ArbolBalanceado{
     int Band;
     void InsertaBalanceado(T, NodoArbolBal<T> *, int *);
     void Imprime(NodoArbolBal<T> *);
+    void EliminaBalanceado(NodoArbolBal<T> *, NodoArbolBal<T> *, int *, T);
   public:
     ArbolBalanceado();
     NodoArbolBal<T> * RegresaRaiz();
@@ -57,7 +58,7 @@ class ArbolBalanceado{
 
     NodoArbolBal<T> *RestructuraI(NodoArbolBal<T> *, int *);
     NodoArbolBal<T> *RestructuraD(NodoArbolBal<T> *, int *);
-    void EliminaBalanceado(NodoArbolBal<T> *, NodoArbolBal<T> *, int *, T);
+    void EliminaBalanceado(T Dato){EliminaBalanceado(Raiz, nullptr, &Band, Dato);}
     void Sustituye(NodoArbolBal<T> *, NodoArbolBal<T> *, int *);
     void Imprime(){Imprime(Raiz);}
 };	
@@ -101,7 +102,7 @@ template <class T>
 void ArbolBalanceado<T>::Imprime(NodoArbolBal<T> * Apunt){
   if(Apunt != nullptr){
     Imprime(Apunt->HijoIzq);
-    std::cout << Apunt->Info << std::endl;
+    std::cout << "Nodo: " << Apunt->Info << " FE = " <<Apunt->FE << std::endl;
     Imprime(Apunt->HijoDer);
   }
 }
@@ -240,7 +241,7 @@ NodoArbolBal<T> * ArbolBalanceado<T>::RestructuraI(NodoArbolBal<T> * Nodo, int *
 				ApAux->FE = -1;
 				*Aviso = 0;
 				break;
-		    case 1:	Nodo->fE = 0;
+		    case 1:	Nodo->FE = 0;
 				ApAux->FE = 0;
 				break;
 		  }
@@ -382,7 +383,7 @@ void ArbolBalanceado<T>::EliminaBalanceado(NodoArbolBal<T> * Apunt, NodoArbolBal
 	            if(Apunt == nullptr)
 		            Raiz = nullptr;
 	            else
-		            Raiz = Apunt
+		            Raiz = Apunt;
 	          *Avisa = 1;
 	      }
 	      else{
