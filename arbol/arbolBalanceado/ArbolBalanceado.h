@@ -370,7 +370,7 @@ void ArbolBalanceado<T>::EliminaBalanceado(NodoArbolBal<T> * Apunt, NodoArbolBal
 	            else
 	              Raiz = Apunt;
 	          *Avisa = 1;
-	      }
+        }
 	      else
 	        if(ApAux->HijoIzq == nullptr){
 	          Apunt = ApAux->HijoDer;
@@ -385,18 +385,18 @@ void ArbolBalanceado<T>::EliminaBalanceado(NodoArbolBal<T> * Apunt, NodoArbolBal
 	            else
 		            Raiz = Apunt;
 	          *Avisa = 1;
-	      }
-	      else{
-          Sustituye(ApAux->HijoIzq, ApAux, Avisa);
-          Apunt = RestructuraI(Apunt, Avisa);
-          if(ApAnt != nullptr)
-            if(*Avisa <= 0)
-              ApAnt->HijoIzq = Apunt;
+          }
+          else{
+            Sustituye(ApAux->HijoIzq, ApAux, Avisa);
+            Apunt = RestructuraI(Apunt, Avisa);
+            if(ApAnt != nullptr)
+              if(*Avisa <= 0)
+                ApAnt->HijoIzq = Apunt;
+              else  
+                ApAnt->HijoDer = Apunt;
             else  
-              ApAnt->HijoDer = Apunt;
-          else  
-            Raiz = Apunt;
-	      }
+              Raiz = Apunt;
+	        }
       }
     }
   else
