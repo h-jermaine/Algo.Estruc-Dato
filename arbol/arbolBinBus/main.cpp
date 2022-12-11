@@ -1,40 +1,37 @@
 #include <iostream>
-#include "Productos.h"
-#include "Fabricas.h"
+#include <map>
+#include "ClienteBanco.h"
 #include "ArbolBinBusqueda.h"
 using namespace std;
 
 int main(){
-  ArbolBinBus<Producto> Inventario;
-  Producto Prod;
-  int Opc, Cla;
+  ArbolBinBus<ClienteBanco> ClienteB;
+  ClienteBanco CliB;
+  int Opc, NumCli;
+  string NumCue;
+  
   do{
     Opc = Menu();
     switch (Opc){
       case 1:{
-               cin >> Prod;
-               Inventario.InsertaNodoSinRep(Prod);
+               cout << "\n\n\n----------------\n\n";
+               cout << "NUMERO DE CLIENTES\n\n";
+               cout << "--------------------\n\n";
+               ClienteB.Inorden();
                break;
              }
       case 2:{
-               cout << "\n\nIngrese la clave del producto a eliminar: ";
-               cin >> Cla;
-               producto Prod(Cla, "", 0);
-               Inventario.EliminaNodo(Prod);
+               NodoArbol<ClienteBanco> *Apunt;
+               Apunt = ClienteB.RegrezaRaiz();
+               Imprimer(Apunt);
                break;
              }
       case 3:{
-               cout << "\n\n\n----------------\n\n";
-               cout << "PRODUCTOS EN INVENTARIO\n\n";
-               cout << "--------------------\n\n";
-               Inventario.Inorden();
                break;
              }
       case 4:{
-               cout << "\n\nIngrese la clave del producto a buscar: ";
-               cin >> Cla;
-               Producto Prod(Cla, "", 0);
-               Inventario.Busqueda(Prod);
+               cin >> CliB;
+               ClienteB.InsertaNodoSinRep(CliB);
                break;
              }
       case 5: 

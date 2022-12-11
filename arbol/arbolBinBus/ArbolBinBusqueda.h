@@ -23,7 +23,7 @@ NodoArbol<T>::NodoArbol(){
 }
 
 template <class T>
-NodoArbol<T>::RegresaInfo(){
+T NodoArbol<T>::RegresaInfo(){
   return Info;
 }
 
@@ -48,9 +48,9 @@ class ArbolBinBus{
     void Preorden(){Preorden(Raiz);}
     void Inorden(){Inorden(Raiz);}
     void Postorden(){Postorden(Raiz);}
-    void Busqueda(T);
+    NodoArbol<T> * Busqueda(T Dato){return Busqueda(Raiz, Dato);}
     void InsertaNodoSinRep(T Dato){InsertaNodoSinRep(Raiz, Dato);}
-    void EliminaNodo(T Dato){EliminaNodo(Raiz. Dato);}
+    void EliminaNodo(T Dato){EliminaNodo(Raiz, Dato);}
 };
 
 template <class T>
@@ -66,14 +66,14 @@ NodoArbol<T> *ArbolBinBus<T>::RegrezaRaiz(){
 template <class T>
 void ArbolBinBus<T>::Preorden(NodoArbol<T> *Apunt){
   if(Apunt){
-    std::cout Apunt->Info << " ";
+    std::cout << Apunt->Info << " ";
     Preorden(Apunt->HijoIzq);
     Preorden(Apunt->HijoDer);
   }
 }
 
 template <class T>
-void ArbolBinBus<T>::Inorden(NodoArbol<T> *Äpunt){
+void ArbolBinBus<T>::Inorden(NodoArbol<T> *Apunt){
   if(Apunt){
     Inorden(Apunt->HijoIzq);
     std::cout<< Apunt->Info << " ";
@@ -104,17 +104,6 @@ NodoArbol<T> * ArbolBinBus<T>::Busqueda(NodoArbol<T> * Apunt, T Dato){
   }
   else
     return nullptr;
-}
-
-template <class T>
-void ArbolBinBus<T>::Busqueda(T Dato){
-  NodoArbol<T> * Apunt = Busqueda(Raiz, Dato);
-  if(Apunt){
-    std::cout << "\n\n\nExiste un producto registrado con esa clave.\n";
-    cout << Apunt->Info;
-  }
-  else
-    std::cout << "\n\nNo se ha registrado ningun producto con esa clave.\n";
 }
 
 template <class T>
