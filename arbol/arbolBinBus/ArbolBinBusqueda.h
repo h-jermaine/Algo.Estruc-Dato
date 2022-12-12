@@ -6,10 +6,13 @@ class ArbolBinBus;
 template <class T>
 class NodoArbol{
   private:
+    //T Info;
+    //NodoArbol<T> *HijoDer;
+    //NodoArbol<T> *HijoIzq;
+  public:
     T Info;
     NodoArbol<T> *HijoDer;
     NodoArbol<T> *HijoIzq;
-  public:
     NodoArbol();
     T RegresaInfo();
     void ActulizaInfo(T);
@@ -35,7 +38,7 @@ void NodoArbol<T>::ActulizaInfo(T Dato){
 template <class T>
 class ArbolBinBus{
   private:
-    NodoArbol<T> * Raiz;
+    //NodoArbol<T> * Raiz;
     NodoArbol<T> * Busqueda(NodoArbol<T> *, T);
     void Preorden(NodoArbol<T> *);
     void Inorden(NodoArbol<T> *);
@@ -43,8 +46,9 @@ class ArbolBinBus{
     void InsertaNodoSinRep(NodoArbol<T> *, T);
     void EliminaNodo(NodoArbol<T> *, T);
   public:
+    NodoArbol<T> *Raiz;
     ArbolBinBus();
-    NodoArbol<T> *RegrezaRaiz();
+    NodoArbol<T> *RegresaRaiz();
     void Preorden(){Preorden(Raiz);}
     void Inorden(){Inorden(Raiz);}
     void Postorden(){Postorden(Raiz);}
@@ -59,7 +63,7 @@ ArbolBinBus<T>::ArbolBinBus(){
 }
 
 template <class T>
-NodoArbol<T> *ArbolBinBus<T>::RegrezaRaiz(){
+NodoArbol<T> *ArbolBinBus<T>::RegresaRaiz(){
   return Raiz;
 }
 
@@ -119,8 +123,8 @@ void ArbolBinBus<T>::InsertaNodoSinRep(NodoArbol<T> * Apunt, T Dato){
         InsertaNodoSinRep(Apunt->HijoDer, Dato);
         Apunt->HijoDer = Raiz;
       }
-      Raiz = Apunt;
     }
+    Raiz = Apunt;
   }
   else{
     ApAux = new NodoArbol<T>();
@@ -144,7 +148,7 @@ void ArbolBinBus<T>::EliminaNodo(NodoArbol<T> *Apunt, T Dato){
       else{
         NodoArbol<T> *ApAux1, *ApAux2, *ApAux3;
         ApAux3 = Apunt;
-        if(!ApAux3->HijoIzq)
+        if(!ApAux3->HijoDer)
           if(!ApAux3->HijoIzq)
             Apunt = nullptr;
           else

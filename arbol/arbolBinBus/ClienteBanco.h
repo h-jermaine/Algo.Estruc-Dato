@@ -4,32 +4,29 @@
 #include <map>
 #include "ArbolBinBusqueda.h"
 
-void Imprime(NodoArbol<ClienteBanco> *);
 int Menu(){
   int Opcion;
   do{
     std::cout << "\n\n\t\tOpciones de trabajo.\n\n\n";
     std::cout << "(1) Generar un reporte de todos los clientes de un banco, ordenados por su numero de clientes.\n";
-    std::cout << "(2) Lee datos de clientes en un txt.\n";
-    std::cout << "(3) Reporte de todos los clientes ordenados por numero de cliente.\n";
+    std::cout << "(2) Generar un reporte de todos los clientes mayores a 5 anyos.\n";
+    std::cout << "(3) Generar un reporte de clientes que tengan como minimo dos cuentas diferentes.\n";
     std::cout << "(4) Dar de alta un nuevo cliente.\n";
-    std::cout << "(5) Reporte de clientes con antiguedad mayor a 5 anyos.\n";
-    std::cout << "(6) Reporte de clientes con cuentas diferentes mayores a 2.\n";
-    std::cout << "(7) Dar de baja a cliente registrago.\n";
-    std::cout << "(8) Actulizar el saldo de de algunas cuentas de los clientes.\n";
-    std::cout << "(9) Actulizar los datos personales.\n\n";
-    std::cout << "(10) Terminar la opcion seleccionada: ";
+    std::cout << "(5) Dar de baja a un cliente por numero de clinte.\n";
+    std::cout << "(6) Actilizar saldo de Algunos clientes con numero de clinte y numero cuenta.\n";
+    std::cout << "(7) Terminar la opcion seleccionada: ";
     std::cin >> Opcion;
-  }while(Opcion > 11 || Opcion < 1);
+  }while(Opcion > 7 || Opcion < 1);
   return Opcion;
 }
 
 class ClienteBanco{
-  private:
+  //private:
+  public:
     int Tiempo;
     std::map<std::string, int> NumeroCuenta;
     int NumeroCliente;
-  public:
+  //public:
     ClienteBanco();
     ClienteBanco(int, std::string, int, int);
     int operator > (ClienteBanco);
@@ -91,13 +88,27 @@ std::ostream & operator << (std::ostream & Escribe, ClienteBanco & ObjCli){
   return Escribe;
 }
 
-void Imprime(NodoArbol<ClienteBanco> *Apunt){
+void ImprimeClientes(NodoArbol<ClienteBanco> *Apunt){
   if(Apunt){
-    Imprime(Apunt->HijoIzq);
+    ImprimeClientes(Apunt->HijoIzq);
     if(Apunt->RegresaInfo().Tiempo > 5)
-      std::cout << Apunt->RegresaInfo();
-    Imprime(Apunt->HijoDer);
+      std::cout << Apunt->Info;
+    ImprimeClientes(Apunt->HijoDer);
   }
+}
+
+void ImprimeCuentas(NodoArbol<ClienteBanco> *Apunt){
+  if(Apunt){
+    if(Apunt->Info.NumeroCuenta.size() >= 2){
+      ImprimeCuentas(Apunt->HijoIzq);
+      std::cout << Apunt->Info;
+      ImprimeCuentas(Apunt->HijoDer);
+    }
+  }
+}
+
+void ActualizaSaldo(NodoArbol<ClienteBanco> * Apunt, std::string NumCue, int Saldo){
+  Apunt->Info.NumeroCuenta[NumCue] = Saldo;
 }
 
 #endif
