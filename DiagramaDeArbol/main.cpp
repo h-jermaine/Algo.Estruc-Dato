@@ -1,72 +1,14 @@
-//#define _WIN32_WINNT 0x0500
 #if defined(UNICODE) && !defined(_UNICODE)
     #define _UNICODE
 #elif defined(_UNICODE) && !defined(UNICODE)
     #define UNICODE
 #endif
 
-#include <iostream>
 #include <tchar.h>
 #include <windows.h>
-#include "resource.h"
 
-LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    HDC hdc;
-    PAINTSTRUCT ps;
-
-    switch (message)                  /* handle the messages */
-    {
-        case WM_PAINT:
-            {
-                hdc = BeginPaint(hwnd, &ps);
-                //SelectObject(hdc, hfDefault);
-                TCHAR text[] = "Defenestration can be hazardous";
-                for(int i = 100; i < 300; i += 50){
-                    for(int j = 100; j < 300; j += 50)
-                    {
-                        //Ellipse(hdc, i, j, 10, 10);
-                        TextOut(hdc, i, j, "*", 1);
-                    }
-                    std::cout << std::endl;
-                }
-                //TextOut(hdc, 100, 100, text, ARRAYSIZE(text));
-                Ellipse(hdc, 10, 10, 50, 50);
-                Ellipse(hdc, 20, 20, 50, 50);
-
-                EndPaint(hwnd, &ps);
-                return 0;
-                break;
-            }
-        /*case WM_PAINT:
-            {
-                hdc = BeginPaint(hwnd, &ps);
-                //Ellipse(hdc, 10, 10, 50, 50);
-                EndPaint(hwnd, &ps);
-                break;
-            }*/
-        case WM_COMMAND:
-
-           break;
-        break;
-            case WM_DESTROY:
-            PostQuitMessage (0);       /* send a WM_QUIT to the message queue */
-            break;
-        /*case WM_LBUTTONDOWN:
-            {
-                char szFileName[MAX_PATH];
-                HINSTANCE hInstance = GetModuleHandle(NULL);
-
-                GetModuleFileName(hInstance, szFileName, MAX_PATH);
-                MessageBox(hwnd, szFileName, "This program is:", MB_OK | MB_ICONINFORMATION);
-            }*/
-        default:                      /* for messages that we don't deal with */
-            return DefWindowProc (hwnd, message, wParam, lParam);
-    }
-    return 0;
-}
-
-
+/*  Declare Windows procedure  */
+LRESULT CALLBACK WindowProcedure (HWND, UINT, WPARAM, LPARAM);
 
 /*  Make the class name into a global variable  */
 TCHAR szClassName[ ] = _T("CodeBlocksWindowsApp");
@@ -89,12 +31,9 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 
     /* Use default icon and mouse-pointer */
     wincl.hIcon = LoadIcon (NULL, IDI_APPLICATION);
-    //wincl.hIcon = LoadIcon (GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MYICON));
     wincl.hIconSm = LoadIcon (NULL, IDI_APPLICATION);
-    //wincl.hIconSm = (HICON)LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MYICON), IMAGE_ICON, 16, 16, 0);
     wincl.hCursor = LoadCursor (NULL, IDC_ARROW);
     wincl.lpszMenuName = NULL;                 /* No menu */
-    //wincl.lpszMenuName = MAKEINTATOM(IDR_MYMENU);                 /* No menu */
     wincl.cbClsExtra = 0;                      /* No extra bytes after the window class */
     wincl.cbWndExtra = 0;                      /* structure or the window instance */
     /* Use Windows's default colour as the background of the window */
@@ -112,8 +51,8 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
            WS_OVERLAPPEDWINDOW, /* default window */
            CW_USEDEFAULT,       /* Windows decides the position */
            CW_USEDEFAULT,       /* where the window ends up on the screen */
-           700,                 /* The programs width */
-           450,                 /* and height in pixels */
+           544,                 /* The programs width */
+           375,                 /* and height in pixels */
            HWND_DESKTOP,        /* The window is a child-window to desktop */
            NULL,                /* No menu */
            hThisInstance,       /* Program Instance handler */
@@ -121,10 +60,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
            );
 
     /* Make the window visible on the screen */
-    ShowWindow (hwnd, SW_SHOWDEFAULT);
-    //MessageBox(NULL, "Goodbye, cruel world!", "Note", MB_OK);
-    /* Para ocultar la ventana de cmd */
-    //ShowWindow (GetConsoleWindow(), SW_HIDE);
+    ShowWindow (hwnd, nCmdShow);
 
     /* Run the message loop. It will run until GetMessage() returns 0 */
     while (GetMessage (&messages, NULL, 0, 0))
@@ -137,4 +73,21 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 
     /* The program return-value is 0 - The value that PostQuitMessage() gave */
     return messages.wParam;
+}
+
+
+/*  This function is called by the Windows function DispatchMessage()  */
+
+LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)                  /* handle the messages */
+    {
+        case WM_DESTROY:
+            PostQuitMessage (0);       /* send a WM_QUIT to the message queue */
+            break;
+        default:                      /* for messages that we don't deal with */
+            return DefWindowProc (hwnd, message, wParam, lParam);
+    }
+
+    return 0;
 }

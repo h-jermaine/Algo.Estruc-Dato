@@ -1,5 +1,8 @@
-#define IDR_MYMENU 101
-#define IDI_MYICON 201
+/* Identificadores */
 
-#define ID_FILE_EXIT 9001
-#define ID_STUFF_GO 9002
+/* Identificadores de comandos */
+#define CM_DIALOGO 101
+
+/* Identificadores de diálogo */
+#define ID_BOTON 100
+

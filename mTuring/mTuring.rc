@@ -1,17 +1,30 @@
+#include <windows.h>
 #include "resource.h"
 
-IDR_MYMENU MENU
+Menu MENU
 BEGIN
-    POPUP "&File"
-    BEGIN
-        MENUITEM "E&xit", ID_FILE_EXIT
-    END
-
-    POPUP "&Stuff"
-    BEGIN
-        MENUITEM "&Go", ID_STUFF_GO
-        MENUITEM "G&o somewhere else", 0, GRAYED
-    END
+ POPUP "&Principal"
+ BEGIN
+  MENUITEM "&Diálogo", CM_DIALOGO
+ END
 END
 
-IDI_MYICON ICON "menu_one.ico"
+DialogoPrueba DIALOG 0, 0, 130, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Diálogo de prueba"
+FONT 8, "Helv"
+BEGIN
+ CONTROL "Botones:", -1, "static",
+    SS_LEFT | WS_CHILD | WS_VISIBLE,
+    8, 9, 28, 8
+ CONTROL "Nuestro botón", ID_BOTON, "BUTTON",
+    BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+    9, 19, 104, 25
+ CONTROL "Aceptar", IDOK, "BUTTON",
+    BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+    8, 50, 45, 14
+ CONTROL "Cancelar", IDCANCEL, "BUTTON",
+    BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+    61, 50, 45, 14
+END
+

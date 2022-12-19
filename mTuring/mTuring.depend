@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1670328876 source:c:\users\marshall lee\desktop\maincpp\mturing\main.cpp
+1670895640 source:c:\users\marshall lee\desktop\maincpp\mturing\main.cpp
 	<tchar.h>
 	<windows.h>
 	"resource.h"
 
-1670328449 c:\users\marshall lee\desktop\maincpp\mturing\resource.h
+1671389767 c:\users\marshall lee\desktop\maincpp\mturing\resource.h
 
-1670330168 source:c:\users\marshall lee\desktop\maincpp\mturing\mturing.rc
+1671389767 source:c:\users\marshall lee\desktop\maincpp\mturing\mturing.rc
+	<windows.h>
 	"resource.h"
 
