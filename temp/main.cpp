@@ -1,30 +1,28 @@
 #include <iostream>
-#include <string>
-#include "resource.h"
 #include <vector>
+#include <string>
+//#include "resource.h"
+#include <map>
 using namespace std;
 int main(){
-  int fila = 14;
-  int colum = 5;
-  strind pantalla = "B00001111B";
-  string sn [] = {"__","0","1","X","Y","B"};    int qn [14] = {0};
-  vector<vector<string>> tabla(fila, vector<string> (colum));
-
-  string line;
-
-  int f, c;
+  map<string, vector<string>> m;
+  string line, row;
   do{
-    cout << "fila: ";
-    cin >> f;
-    cout << "columna: ";
-    cin >> c;
-    cin >> line;
-    if(line != "\0"){
-      insertar(tabla, f, c, line, pantalla);
-      cout << pantalla << endl;
-      mostrar(sn, qn, tabla, fila, colum);
-    }
-  }while(line != "s");
+    vector<string> t;
+    cout << "row: "; 
+    getline(cin, row);
+    cout << "-> ";
+    getline(cin, line);
+    t.push_back(line);
+    m.insert(pair<string, vector<string>>(row, t));
+    if(line == "ver"){
+      for(auto itr = m.begin(); itr != m.end(); itr++)
+        cout << itr->first << "   ";
+      cout << endl;
+      for(auto itr = m.begin(); itr != m.end(); itr++){
 
+      }
+    }
+  }while(line != "exit");
   return 0;
 }
