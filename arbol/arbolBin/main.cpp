@@ -14,8 +14,10 @@ int main(){
   a->InsertaNodos(ta, 2, tc);
   b->InsertaNodos(tc, 2, ta);
 
-  a->Preorden();
-  b->Preorden();
+  a->Inorden();
+  cout << endl;
+  b->Inorden();
+  cout << endl;
 
   if(a->SonIguales(a->Raiz, b->Raiz))
     cout << "si son iguales" << endl;

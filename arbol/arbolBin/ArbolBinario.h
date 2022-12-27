@@ -43,12 +43,14 @@ class ArbolBinario{
     void InsertarArbol(NodoArbol<T> *&, T);
     void Preorden(NodoArbol<T> *&);
     void Postorden(NodoArbol<T> *&);
+    void Inorden(NodoArbol<T> *&);
   public:
     NodoArbol<T> * Raiz;
     ArbolBinario();
     void InsertarArbol(T Dato){InsertarArbol(Raiz, Dato);}
     void Preorden(){Preorden(Raiz);}
     void Postorden(){Postorden(Raiz);}
+    void Inorden(){Inorden(Raiz);}
     T m(){
       return Raiz->HijoDer->Info;
     } 
@@ -64,6 +66,7 @@ class ArbolBinario{
 	      return true;
       return (Apunt1 && Apunt2) && SonIguales(Apunt1->HijoIzq, Apunt2->HijoDer) && SonIguales(Apunt1->HijoDer, Apunt2->HijoIzq) && (Apunt2->Info == Apunt2->Info);
     }
+
     void InsertaNodos(NodoArbol<T> * a1, T Dato, NodoArbol<T> * a2){
       NodoArbol<T> * tmp = new NodoArbol<T>();
       tmp->Info = Dato;
@@ -104,14 +107,14 @@ void ArbolBinario<T>::Preorden(NodoArbol<T> *& Apunt){
   }
 }
 
-/*template <class T>
+template <class T>
 void ArbolBinario<T>::Inorden(NodoArbol<T> *& Apunt){
   if(Apunt){
     Inorden(Apunt->HijoIzq);
     std::cout << Apunt->Info << " ";
     Inorden(Apunt->HijoDer);
   }
-}*/
+}
 
 template <class T>
 void ArbolBinario<T>::Postorden(NodoArbol<T> *& Apunt){
