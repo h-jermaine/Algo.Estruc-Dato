@@ -64,7 +64,7 @@ class ArbolBinario{
     bool SonIguales(NodoArbol<T> * Apunt1, NodoArbol<T> * Apunt2){
       if(Apunt1 == nullptr && Apunt2 == nullptr)
 	      return true;
-      return (Apunt1 && Apunt2) && SonIguales(Apunt1->HijoIzq, Apunt2->HijoDer) && SonIguales(Apunt1->HijoDer, Apunt2->HijoIzq) && (Apunt2->Info == Apunt2->Info);
+      return (Apunt1 && Apunt2) && SonIguales(Apunt1->HijoIzq, Apunt2->HijoDer) && SonIguales(Apunt1->HijoDer, Apunt2->HijoIzq) && (Apunt1->Info == Apunt2->Info);
     }
 
     void InsertaNodos(NodoArbol<T> * a1, T Dato, NodoArbol<T> * a2){
