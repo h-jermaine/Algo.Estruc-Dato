@@ -11,6 +11,7 @@ class NodoArbol{
     NodoArbol<T> * HijoDer;
   public:
     NodoArbol();
+    NodoArbol(T);
     T RegresaInfo();
     friend class ArbolBinario<T>;
 };
@@ -19,6 +20,13 @@ template <class T>
 NodoArbol<T>::NodoArbol(){
   HijoDer = nullptr;
   HijoIzq = nullptr;
+}
+
+template <class T>
+NodoArbol<T>::NodoArbol(T Dato){
+  Info = Dato;
+  HijoIzq = nullptr;
+  HijoDer = nullptr;
 }
 
 template <class T>
@@ -44,16 +52,26 @@ class ArbolBinario{
     T m(){
       return Raiz->HijoDer->Info;
     } 
+
     bool completo(NodoArbol<T> * Apunt){
       if(Apunt->HijoDer == nullptr && Apunt->HijoIzq == nullptr)
-	return true;
+	      return true;
       return ((Apunt->HijoDer && Apunt->HijoIzq) && completo(Apunt->HijoDer) && completo(Apunt->HijoIzq));
     }
 
     bool SonIguales(NodoArbol<T> * Apunt1, NodoArbol<T> * Apunt2){
       if(Apunt1 == nullptr && Apunt2 == nullptr)
-	return true;
-      return (Apunt1 && Apunt2) && SonIguales(Apunt1->HijoDer, Apunt2->HijoDer) && SonIguales(Apunt1->HijoIzq, Apunt2->HijoIzq);
+	      return true;
+      return (Apunt1 && Apunt2) && SonIguales(Apunt1->HijoIzq, Apunt2->HijoDer) && SonIguales(Apunt1->HijoDer, Apunt2->HijoIzq) && (Apunt2->Info == Apunt2->Info);
+    }
+    void InsertaNodos(NodoArbol<T> * a1, T Dato, NodoArbol<T> * a2){
+      NodoArbol<T> * tmp = new NodoArbol<T>();
+      tmp->Info = Dato;
+      tmp->HijoIzq = nullptr;
+      tmp->HijoDer = nullptr;
+      Raiz = tmp;
+      Raiz->HijoIzq = a1;
+      Raiz->HijoDer = a2;
     }
 };
 

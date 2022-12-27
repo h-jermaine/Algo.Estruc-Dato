@@ -8,7 +8,7 @@
 #include <iostream>
 #include <tchar.h>
 #include <windows.h>
-#include "resource.h"
+//#include "resource.h"
 
 LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -66,7 +66,7 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
     return 0;
 }
 
-
+LRESULT CALLBACK ButtonProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 /*  Make the class name into a global variable  */
 TCHAR szClassName[ ] = _T("CodeBlocksWindowsApp");
@@ -104,6 +104,24 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     if (!RegisterClassEx (&wincl))
         return 0;
 
+    WNDCLASSEX wcButton = { 0 };
+    wcButton.cbSize = sizeof(WNDCLASSEX);
+    wcButton.style = CS_HREDRAW | CS_VREDRAW;
+    wcButton.lpfnWndProc = ButtonProc;
+    wcButton.hInstance = hThisInstance;
+    wcButton.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wcButton.hbrBackground = (HBRUSH)COLOR_WINDOW;
+    wcButton.lpszClassName = "Button";
+    RegisterClassEx(&wcButton);
+
+    if (!RegisterClassEx (&wcButton))
+        return 0;
+
+    HWND hEdit = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", "", WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL,
+    10, 10, 200, 50, hwnd, (HMENU)1, hThisInstance, NULL);
+    if (!hEdit)
+        return 1;
+
     /* The class is registered, let's create the program*/
     hwnd = CreateWindowEx (
            0,                   /* Extended possibilites for variation */
@@ -120,6 +138,11 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
            NULL                 /* No Window Creation data */
            );
 
+    HWND hButton = CreateWindowEx(0, "Button", "Obtener texto", WS_CHILD | WS_VISIBLE,
+    10, 70, 100, 20, hwnd, (HMENU)2, hThisInstance, NULL);
+
+    if (!hButton)
+        return 1;
     /* Make the window visible on the screen */
     ShowWindow (hwnd, SW_SHOWDEFAULT);
     //MessageBox(NULL, "Goodbye, cruel world!", "Note", MB_OK);
@@ -137,4 +160,34 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 
     /* The program return-value is 0 - The value that PostQuitMessage() gave */
     return messages.wParam;
+}
+
+
+LRESULT CALLBACK ButtonProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    HWND hEdit;
+    switch (uMsg)
+    {
+    case WM_LBUTTONDOWN:
+    {
+        // Obtiene la longitud del texto ingresado por el usuario
+        int textLength = GetWindowTextLength(hEdit) + 1;
+
+        // Crea una matriz de caracteres para almacenar el texto
+        char* text = new char[textLength];
+
+        // Obtiene el texto ingresado por el usuario
+        GetWindowText(hEdit, text, textLength);
+
+        // Muestra el texto en un cuadro de diálogo
+        MessageBox(NULL, text, "Texto ingresado", MB_OK);
+
+        // Limpia la memoria
+        delete[] text;
+
+        return 0;
+    }
+    }
+
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }

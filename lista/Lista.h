@@ -8,6 +8,10 @@ private:
   Nodo *fin;
 public:
   Lista();
+  Nodo * RetornaMayor(Nodo * Apunt){
+    if(Apunt != nullptr)
+    return Apunt;
+  }
   void insertar_init(int);
   void insertar_ult(int);
   void eliminar_init();

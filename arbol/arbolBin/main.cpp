@@ -3,27 +3,23 @@
 using namespace std;
 
 int main(){
-  ArbolBinario<int> * ab = new ArbolBinario<int>();
-  ArbolBinario<int> * ac = new ArbolBinario<int>();
-  ab->InsertarArbol(5);
-  ab->InsertarArbol(6);
-  ab->InsertarArbol(3);
-  ab->InsertarArbol(4);
-  //ab->InsertarArbol(2);
 
-  ac->InsertarArbol(2);
-  ac->InsertarArbol(3);
-  ac->InsertarArbol(1);
-  //cout << ab->m() << endl;
-  //ab->Preorden();
-  //ac->Preorden();
-  if(ab->SonIguales(ab->Raiz, ac->Raiz))
-    cout << "si son" << endl;
+  ArbolBinario<int> * a = new ArbolBinario<int>();
+  ArbolBinario<int> * b = new ArbolBinario<int>();
+
+  NodoArbol<int> * ta = new NodoArbol<int>(1);
+  NodoArbol<int> * tb = new NodoArbol<int>(2);
+  NodoArbol<int> * tc = new NodoArbol<int>(3);
+
+  a->InsertaNodos(ta, 2, tc);
+  b->InsertaNodos(tc, 2, ta);
+
+  a->Preorden();
+  b->Preorden();
+
+  if(a->SonIguales(a->Raiz, b->Raiz))
+    cout << "si son iguales" << endl;
   else
-    cout << "no son" << endl;
-  if(ab->completo(ab->Raiz))
-    cout << "cheroka" << endl;
-  else
-    cout << "no cheroka " << endl;
+    cout << "no son iguales" << endl;
   return 0;
 }

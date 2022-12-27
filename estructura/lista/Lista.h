@@ -23,6 +23,16 @@ template<class T>
 class Lista{
   private:
     NodoLista<T> * Primero;
+    void NodoMayor(NodoLista<T> * Apunt, T Dato){
+      if(Apunt != nullptr){
+        if(Apunt->Info > Dato)
+          NodoMayor(Apunt->Liga, Apunt->Info);
+        else
+          NodoMayor(Apunt->Liga, Dato);
+      }
+      else
+        std::cout << Dato << std::endl;
+    }
   public:
     Lista();
     void InsertaInicio(T);
@@ -32,6 +42,9 @@ class Lista{
     int EliminaPrimero();
     int EliminaUltimo();
     int EliminaUnNodo(T);
+    void NodoMayor(){
+      NodoMayor(Primero, 0);
+    }
     T RegresaInfo();
     NodoLista<T> * RegresaPrimero();
     NodoLista<T> * RegresaPrimSig(){
