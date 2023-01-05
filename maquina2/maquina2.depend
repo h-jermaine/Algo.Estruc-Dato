@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1672434348 source:c:\users\marshall lee\desktop\maincpp\maquina2\main.cpp
-	<tchar.h>
-	<windows.h>
-	<string>
-	<iostream>
-
