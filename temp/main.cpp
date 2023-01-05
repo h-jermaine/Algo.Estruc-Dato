@@ -1,28 +1,26 @@
-#include <iostream>
-#include <vector>
-#include <string>
-//#include "resource.h"
-#include <map>
+﻿#include <iostream>
 using namespace std;
-int main(){
-  map<string, vector<string>> m;
-  string line, row;
-  do{
-    vector<string> t;
-    cout << "row: "; 
-    getline(cin, row);
-    cout << "-> ";
-    getline(cin, line);
-    t.push_back(line);
-    m.insert(pair<string, vector<string>>(row, t));
-    if(line == "ver"){
-      for(auto itr = m.begin(); itr != m.end(); itr++)
-        cout << itr->first << "   ";
-      cout << endl;
-      for(auto itr = m.begin(); itr != m.end(); itr++){
 
+int main(){
+  int n;
+  cout << "Ingrese datos\n";
+  do{
+    cin >> n;
+    int tmp = 0;
+    for(int i = 0; i < n; i ++){
+      for(int j = 0; j < n; j ++){
+        for(int k = 0; k < j; k++){
+          if(j == k || i == k || (n - 1) == i || (n - 1) == j)
+            cout << k << " ";
+          else
+            cout << "+" << " ";
+        }
       }
+      tmp ++;
+      cout << endl;
     }
-  }while(line != "exit");
+    cout << endl;
+    cout << endl;
+  }while(n > 0);
   return 0;
 }
